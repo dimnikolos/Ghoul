@@ -1,5 +1,10 @@
 #-*- coding: utf-8 -*-
 class JSONinfo():
+	"""
+	class JSONinfo
+	reads the info section of the project.json and
+	returns info
+	"""
 	def __init__(self,JSONstruct):
 		self.JSONstruct = JSONstruct
 

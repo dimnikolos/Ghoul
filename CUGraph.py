@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 import igraph
+import igraph.vendor.texttable #needed for py2exe
 from Sprites import *
 
 
