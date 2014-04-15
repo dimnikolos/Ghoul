@@ -17,6 +17,7 @@ class Main:
         self.labelText = Tkinter.StringVar()
     def setFilename(self):
         projectFile = tkFileDialog.askopenfilename(title="Choose a file...", filetypes=[('Scratch 2.0 projects','*.sb2'),('All files',"*.*")])
+        print projectFile
         self.filename = split(projectFile)[1]
         self.labelText.set(self.filename)
         self.compute()
@@ -74,7 +75,7 @@ class Main:
         cug.writeGraph(self.projectBasename+"_m_","message")
         cug.writeGraph(self.projectBasename+"_l_","list")
         cug.writeGraph(self.projectBasename+"_a_")
-        tkMessageBox.showinfo("OK", "Generated svg files!")
+        tkMessageBox.showinfo("OK", "Generated png files!")
 
 
 

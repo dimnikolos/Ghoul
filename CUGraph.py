@@ -1,6 +1,8 @@
 #-*- coding: utf-8 -*-
 import igraph
 import igraph.vendor.texttable #needed for py2exe
+import cairo
+import pygr2gl
 from Sprites import *
 
 
@@ -30,27 +32,43 @@ class CUGraph():
 			if (cu.getCUType() == cuType):
 				for aReader in cu.getReaders():
 					for aWriter in cu.getWriters():
-						if ((self.nameList.index(aReader),self.nameList.index(aWriter)) not in edges):
+						#do not remove duplicates
+						#if ((self.nameList.index(aReader),self.nameList.index(aWriter)) not in edges):
 							edges.append((self.nameList.index(aWriter),self.nameList.index(aReader)))
 		return edges
 	
 	def writeGraph(self,filename,cuType="all"):
 		if (cuType == "all"):
 			#allEdges is consists of edges from variables/messages/lists
-			#if two sprites are connected with two or more CUs 
-			#only one line is drawn
+			
 			allEdges = self.graphEdges("variable")
-			allEdges.extend([edge for edge in self.graphEdges("list") if edge not in allEdges])
-			allEdges.extend([edge for edge in self.graphEdges("message") if edge not in allEdges])
+			#REMOVE DUPLICATES
+			#allEdges.extend([edge for edge in self.graphEdges("list") if edge not in allEdges])
+			#allEdges.extend([edge for edge in self.graphEdges("message") if edge not in allEdges])
+			allEdges.extend([edge for edge in self.graphEdges("list")])
+			allEdges.extend([edge for edge in self.graphEdges("message")])
 		else:
 			allEdges = self.graphEdges(cuType)
+		
 		if (len(allEdges)>0):
+			bbox = igraph.BoundingBox(800,600)
+			surface = cairo.ImageSurface(cairo.FORMAT_ARGB32,800,600)
 			g = igraph.Graph(allEdges,directed = True)
+			#multiple lines are depicted
+			igraph.autocurve(g)
+
 			#all sprites are depicted in the graph 
 			#connected or not
-			g.vs["label"] = self.nameList
-			layout = g.layout("kk")
-			g.write_svg(filename + ".svg",layout = layout)
+			#labels converted to greeklish
+			g.vs["label"] = [pygr2gl.convert(label) for label in self.nameList]
+			g.es["label"] = ["hi" for x in g.es]
+
+			#layout = g.layout("kk")
+			#g.write_svg(filename + ".svg")#,layout = layout)
+			plot = igraph.plot(g,surface,bounding_box = bbox)
+			plot.background = None
+			plot.redraw()
+			surface.write_to_png(filename + ".png")
 		else:
 			print("No edges for type: %s") % (cuType)
 		
