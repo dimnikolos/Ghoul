@@ -36,10 +36,10 @@ nosetests.xml
 .pydevproject
 
 # All kinds of files used in project
-.sb2
-.csv
-.cus
-.cur
-.png
-.csv
-.svg
+*.sb2
+*.csv
+*.cus
+*.cur
+*.png
+*.csv
+*.svg

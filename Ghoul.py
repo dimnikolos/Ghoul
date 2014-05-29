@@ -23,14 +23,10 @@ class Main:
         self.compute()
 
     def getBasename(self):
-        """getBasename(self,projectInfo)
-           if there is a projectID then the basename is the projectID
-           otherwise the original filename is used
+        """getBasename(self)
+           the original filename is used
         """
-        if (self.projectInfo.getProjectID() is not None):
-            return self.projectInfo.getProjectID()
-        else:
-            return basename(self.filename)
+        return basename(self.filename)
 
     def compute(self):
         if (self.filename is not None):
@@ -64,21 +60,34 @@ class Main:
         #units in the project
         self.cul.writeCUStoFile(self.projectBasename)
         tkMessageBox.showinfo("OK", "Generated cus file!")
-    def writeSVGs(self):
+    def writePNGs(self):
         #there are four graphs for the communication units
         #1.variables
         #2.messages
         #3.lists
         #4.all communication units
         cug = CUGraph(self.cul,self.sprites)
-        cug.writeGraph(self.projectBasename+"_v_","variable")
-        cug.writeGraph(self.projectBasename+"_m_","message")
-        cug.writeGraph(self.projectBasename+"_l_","list")
+        cug.writeGraph(self.projectBasename+"_v_","variable",cuAsNode = True)
+        cug.writeGraph(self.projectBasename+"_m_","message", cuAsNode = False)
+        cug.writeGraph(self.projectBasename+"_l_","list", cuAsNode = True)
+        cug.writeGraph(self.projectBasename+"_s_","scene", cuAsNode = False)
         cug.writeGraph(self.projectBasename+"_a_")
         tkMessageBox.showinfo("OK", "Generated png files!")
-
-
-
+"""
+    def writePNGs2(self):
+        #there are four graphs for the communication units
+        #1.variables
+        #2.messages
+        #3.lists
+        #4.all communication units
+        cug = CUGraph(self.cul,self.sprites)
+        cug.writeGraph(self.projectBasename+"_v2_","variable",cuAsNode = True)
+        cug.writeGraph(self.projectBasename+"_m2_","message",cuAsNode = True)
+        cug.writeGraph(self.projectBasename+"_l2_","list",cuAsNode = True)
+        cug.writeGraph(self.projectBasename+"_a2_",cuAsNode = True)
+        cug.writeGraph(self.projectBasename+"_s2_",cuAsNode = True)
+        tkMessageBox.showinfo("OK", "Generated png files!")
+"""
 
 
 
@@ -94,18 +103,20 @@ def main():
     top = Tkinter.Tk()
     mainInstance = Main()
     # Code to add widgets will go here...
-    openFileButton   = Tkinter.Button(top,text="Browse (.sb2)", command = mainInstance.setFilename, width=16)
-    nameLabel        = Tkinter.Label(top,textvariable=mainInstance.labelText,width=16)
-    writeStatsButton = Tkinter.Button(top,text="Write Statistics", command = mainInstance.writeStats, width=16)
-    writeCUSButton   = Tkinter.Button(top,text="Write CUS report", command = mainInstance.writeCUS, width=16)
-    writeCURButton   = Tkinter.Button(top,text="Write CUR report", command = mainInstance.writeCUR, width=16)
-    writeSVGButton   = Tkinter.Button(top,text="Generate graphs", command = mainInstance.writeSVGs, width=16)
+    openFileButton   = Tkinter.Button(top,text="Browse (.sb2)", command = mainInstance.setFilename, width=17)
+    nameLabel        = Tkinter.Label(top,textvariable=mainInstance.labelText,width=17)
+    writeStatsButton = Tkinter.Button(top,text="Write Statistics", command = mainInstance.writeStats, width=17)
+    writeCUSButton   = Tkinter.Button(top,text="Write CUS report", command = mainInstance.writeCUS, width=17)
+    writeCURButton   = Tkinter.Button(top,text="Write CUR report", command = mainInstance.writeCUR, width=17)
+    writePNGButton   = Tkinter.Button(top,text="Generate graphs", command = mainInstance.writePNGs, width=17)
+    #writePNGButton2  = Tkinter.Button(top,text="Generate graphs 2", command = mainInstance.writePNGs2, width=17)
     openFileButton.pack()
     nameLabel.pack()
     writeStatsButton.pack()
     writeCUSButton.pack()
     writeCURButton.pack()
     writeSVGButton.pack()
+    writePNGButton2.pack()
     top.mainloop()
     
 main()

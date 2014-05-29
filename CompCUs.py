@@ -115,6 +115,12 @@ class CompCUs():
 							self.CUCollection.addReader(script[i+1],sprite.name,"list")
 						except IndexError:
 							pass
+					elif ((expr == "startScene") or (expr == "startSceneAndWait")):
+						self.CUCollection.addWriter("scene",sprite.name,"scene")
+					elif (expr == "whenSceneStarts"):
+						self.CUCollection.addReader("scene",sprite.name,"scene")
+
+
 
 		return(self.CUCollection)
 

@@ -26,7 +26,7 @@ class CommUnit:
 	   with readers and writers
 	"""
 	def __init__(self,cuName,cuType):
-		if (cuType=="variable" or cuType == "list" or cuType == "message"):
+		if (cuType=="variable" or cuType == "list" or cuType == "message" or cuType == "scene"):
 			self.cuName = cuName
 			self.cuType = cuType
 			self.writers = []
@@ -36,6 +36,9 @@ class CommUnit:
 
 	def getCUType(self):
 		return(self.cuType)
+
+	def getName(self):
+		return(self.cuName)
 
 	def addWriter(self,writerObj):
 		"""

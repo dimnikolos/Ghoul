@@ -1,9 +1,12 @@
 from distutils.core import setup
-import py2exe
+import py2exe, sys, os
 
-setup(
-     console = ['Ghoul.py'], 
-	 options = {'py2exe':{'bundle_files':2}},
-	 zipfile = None
-	 
-	 )
+setup(windows=[{'script': 'Ghoul.py'}],
+    options={
+        'py2exe':
+        {
+            'bundle_files':2
+        }
+    },
+	zipfile = None
+)
