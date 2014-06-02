@@ -44,3 +44,4 @@ nosetests.xml
 *.csv
 *.svg
 project.json
+*.adj
