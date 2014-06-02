@@ -75,7 +75,10 @@ class CUGraph():
 			#all sprites are depicted in the graph 
 			#connected or not
 			#labels converted to greeklish
-			g.vs["label"] = [pygr2gl.convert(label) for label in self.nameList]
+			#only last 6 digits -> does not clutter graph with huge names
+			g.vs["label"] = [pygr2gl.convert(label)[-6:] for label in self.nameList]
+
+			
 			for i in range(1,len(g.vs)):
 				g.vs[i]["color"]="blue"
 			for i in range(1,min(self.spritesNumber,len(g.vs))):
@@ -86,6 +89,7 @@ class CUGraph():
 				if (g.degree(vertex)<1):
 					verticesToRemove.append(vertex)
 			g.delete_vertices(verticesToRemove)
+			g.write_adjacency(filename + ".adj")
 			#layout = g.layout("kk")
 			#g.write_svg(filename + ".svg")#,layout = layout)
 			plot = igraph.plot(g,surface,bounding_box = bbox)
@@ -94,4 +98,7 @@ class CUGraph():
 			surface.write_to_png(filename + ".png")
 		else:
 			print("No edges for type: %s") % (cuType)
+
 		
+
+
