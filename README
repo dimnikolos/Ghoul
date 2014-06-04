@@ -3,7 +3,8 @@ Ghoul is a Scratch 2.0 project analyzer. It produces statistics about commands, 
 .csv report : Commands Statistics
 .cur report : Messages / Variables / Lists per sprite
 .cus report : Detailed statistics about messages / variables / lists
-_m_.svg image : Graph representing communication via messages
-_v_.svg image : Graph representing communication via variables
-_l_.svg image : Graph representing communication via lists
-_a_.svg image : Graph representing all communication via messages / variables / lists
+_m_.png image : Graph representing communication via messages
+_v_.png image : Graph representing communication via variables
+_l_.png image : Graph representing communication via lists
+_s_.png image : Graph representing communication via scenes
+_a_.svg image : Graph representing all communication via messages / variables / lists / scene

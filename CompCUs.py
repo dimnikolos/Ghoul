@@ -39,10 +39,16 @@ class CompCUs():
 					elif (cu.cuType == "list"):
 						cuListCount += 1
 		with open(filename+".cur","w") as f:
+			f.write("Number of sprites: %d" %(numofSprites))
+			f.write("Number of variables: %d\n" % (cuVarCount))
 			f.write("Variables as CUs per sprite: %.2f\n"  %(float(cuVarCount) / numofSprites))
+			f.write("Number of messages: %d\n" %(cuMessCount))
 			f.write("Messages as CUs per sprite: %.2f\n" %(float(cuMessCount) / numofSprites))
+			f.write("Number of lists: %d\n" % (cuListCount))
 			f.write("Lists as CUs per sprite %.2f\n" %(float(cuListCount) / numofSprites))
-			f.write("CUs per sprite %.2f\n" %(float((cuVarCount + cuMessCount + cuListCount))/numofSprites))
+			cuCount = cuVarCount + cuMessCount + cuListCount
+			f.write("Total CUs: %d" %(cuCount + 1)) #Counting scene as a CU
+			f.write("CUs per sprite %.2f\n" %(float(cuCount)/numofSprites))
 
 	def parseCUs(self):
 		"""
