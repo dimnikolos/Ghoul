@@ -219,7 +219,7 @@ pip-log.txt
 *.cus
 *.cur
 *.adj
-*.png
+*_.png
 *.csv
 project.json
 #old svg files
