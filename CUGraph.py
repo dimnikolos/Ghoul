@@ -89,7 +89,7 @@ class CUGraph():
 				if (g.degree(vertex)<1):
 					verticesToRemove.append(vertex)
 			g.delete_vertices(verticesToRemove)
-			g.write_adjacency(filename + ".adj")
+			#g.write_adjacency(filename + ".adj")
 			#layout = g.layout("kk")
 			#g.write_svg(filename + ".svg")#,layout = layout)
 			plot = igraph.plot(g,surface,bounding_box = bbox)

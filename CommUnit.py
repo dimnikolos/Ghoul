@@ -107,10 +107,16 @@ class CommUnit:
 		* means that a sprite used broadcastandwait and it 
 		is only used in messages
 		"""
-		returnString = self.cuName + u"\n" + u"-" * 30+ u"\n" + u"Readers:"
+		if (self.cuType == "message"):
+			returnString = self.cuName + u"\n" + u"-" * 30+ u"\n" + u"Receivers:"
+		else:
+			returnString = self.cuName + u"\n" + u"-" * 30+ u"\n" + u"Readers:"
 		for reader in self.readers:
 			returnString += unicode(reader) + ','
-		returnString += u"\nWriters:"
+		if (self.cuType == "message"):
+			returnString += u"\nSenders:"
+		else:
+			returnString += u"\nWriters:"
 		for writer in self.writers:
 			returnString += unicode(writer) + ','
 		return(returnString)
