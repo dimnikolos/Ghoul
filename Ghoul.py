@@ -16,18 +16,19 @@ class Main:
     def __init__(self):
         self.labelText = Tkinter.StringVar()
         self.parsedFile = False
-    def setFilename(self):
-        projectFile = tkFileDialog.askopenfilename(title="Choose a file...", filetypes=[('Scratch 2.0 projects','*.sb2'),('All files',"*.*")])
-        self.filename = split(projectFile)[1]
-        self.labelText.set(self.filename)
-        self.compute()
-        self.parsedFile = True
-
     def getBasename(self):
         """getBasename(self)
            the original filename is used
         """
         return splitext(basename(self.filename))[0]
+    def setFilename(self):
+        self.filename = tkFileDialog.askopenfilename(title="Choose a file...", filetypes=[('Scratch 2.0 projects','*.sb2'),('All files',"*.*")])
+        #self.filename = split(projectFile)[1]
+        self.labelText.set(self.getBasename())
+        self.compute()
+        self.parsedFile = True
+
+
 
     def compute(self):
         self.projectBasename = self.getBasename();

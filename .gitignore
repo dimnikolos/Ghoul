@@ -42,3 +42,4 @@ nosetests.xml
 *.png
 *.csv
 project.json
+*.html
