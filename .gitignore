@@ -224,3 +224,4 @@ pip-log.txt
 project.json
 #old svg files
 *.svg
+*.py
