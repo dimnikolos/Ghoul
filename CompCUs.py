@@ -2,6 +2,7 @@
 from Sprites import *
 from CommUnit import *
 from JSONinfo import *
+import os.path
 
 class CompCUs():
 	"""
@@ -39,7 +40,7 @@ class CompCUs():
 						cuMessCount += 1
 					elif (cu.cuType == "list"):
 						cuListCount += 1
-		with open(filename+".cur","a") as f:
+		with open(filename + ".cur","a") as f:
 			f.write("Number of sprites: %d\n" %(numofSprites))
 			f.write("Number of variables: %d\n" % (cuVarCount))
 			f.write("Variables as CUs per sprite: %.2f\n"  %(float(cuVarCount) / numofSprites))
