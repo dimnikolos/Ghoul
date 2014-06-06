@@ -35,13 +35,10 @@ nosetests.xml
 .project
 .pydevproject
 
-# All kinds of files used in project
+# User files
 *.sb2
 *.csv
-*.cus
 *.cur
 *.png
 *.csv
-*.svg
 project.json
-*.adj

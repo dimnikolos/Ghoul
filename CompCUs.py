@@ -39,8 +39,8 @@ class CompCUs():
 						cuMessCount += 1
 					elif (cu.cuType == "list"):
 						cuListCount += 1
-		with open(filename+".cur","w") as f:
-			f.write("Number of sprites: %d" %(numofSprites))
+		with open(filename+".cur","a") as f:
+			f.write("Number of sprites: %d\n" %(numofSprites))
 			f.write("Number of variables: %d\n" % (cuVarCount))
 			f.write("Variables as CUs per sprite: %.2f\n"  %(float(cuVarCount) / numofSprites))
 			f.write("Number of messages: %d\n" %(cuMessCount))
@@ -48,7 +48,7 @@ class CompCUs():
 			f.write("Number of lists: %d\n" % (cuListCount))
 			f.write("Lists as CUs per sprite %.2f\n" %(float(cuListCount) / numofSprites))
 			cuCount = cuVarCount + cuMessCount + cuListCount
-			f.write("Total CUs: %d" %(cuCount))
+			f.write("Total CUs: %d\n" %(cuCount))
 			f.write("CUs per sprite %.2f\n" %(float(cuCount)/numofSprites))
 
 	def parseCUs(self):

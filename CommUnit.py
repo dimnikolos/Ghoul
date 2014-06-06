@@ -203,5 +203,5 @@ class CUCollection():
 		writes the detailed report of communication units
 		to a file with .cus extension
 		"""
-		with open(baseName+".cus",'w') as f:
+		with open(baseName+".cur",'w') as f:
 			f.write(str(self))

@@ -2,7 +2,7 @@
 import igraph
 import igraph.vendor.texttable #needed for py2exe
 import cairo
-import pygr2gl
+from unidecode import unidecode
 from Sprites import *
 
 
@@ -76,7 +76,7 @@ class CUGraph():
 			#connected or not
 			#labels converted to greeklish
 			#only last 6 digits -> does not clutter graph with huge names
-			g.vs["label"] = [pygr2gl.convert(label)[-6:] for label in self.nameList]
+			g.vs["label"] = [unidecode(unicode(label))[-10:] for label in self.nameList]
 
 			
 			for i in range(1,len(g.vs)):
