@@ -95,6 +95,7 @@ class CUGraph():
 			plot = igraph.plot(g,surface,bounding_box = bbox)
 			plot.background = None
 			plot.redraw()
+			print(filename)
 			surface.write_to_png(filename + ".png")
 		else:
 			print("No edges for type: %s") % (cuType)

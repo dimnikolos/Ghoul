@@ -39,7 +39,9 @@ class Main:
                 tkMessageBox.showinfo("Project.json error!", "File project.json is corrupted. Select another .sb2 file!")
             else:
                 self.projectInfo  = JSONinfo(self.projectJSON)
-                self.projectBasename = self.getBasename()
+                if not os.path.exists('Reports'):
+                    os.makedirs('Reports')
+                self.projectBasename = os.path.join('Reports',self.getBasename());
 
                 (self.floatingScripts,self.sprites) = jsontoSprites(self.projectJSON)
                 self.cu = CompCUs(self.projectInfo,self.sprites)

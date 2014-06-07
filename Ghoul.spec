@@ -1,6 +1,6 @@
 # -*- mode: python -*-
 a = Analysis(['Ghoul.py'],
-             pathex=['C:\\users\\CB02~1\\GOOGLE~1\\MYPROJ~1\\Ghoul'],
+             pathex=['C:\\Users\\CB02~1\\GOOGLE~1\\MYPROJ~1\\Ghoul'],
              hiddenimports=[],
              hookspath=None,
              runtime_hooks=None)
