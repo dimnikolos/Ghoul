@@ -225,3 +225,4 @@ project.json
 #old svg files
 *.svg
 *.py
+*.spec
