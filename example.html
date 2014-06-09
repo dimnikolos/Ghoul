@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Ghoul : Scratch 2.0 projects analyzer" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ghoul</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/dimnikolos/Ghoul">View on GitHub</a>
+
+          <h1 id="project_title"><a href="./index.html">Ghoul</a></h1>
+          <h2 id="project_tagline">Scratch 2.0 projects analyzer</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/dimnikolos/Ghoul/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/dimnikolos/Ghoul/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner"><p>
+<h2>Example</h2>
+<h3>The project</h3>
+            <iframe allowtransparency="true" width="485" height="402" src="http://scratch.mit.edu/projects/embed/23395589/?autostart=false" frameborder="0" allowfullscreen></iframe>
+<h3>The reports</h3>
+<h4>CSV Report</h4>
+CSV Report counts the appearance of every command in the project and the command categories also.
+<p><a href="./gh-pages/Ghoul example.csv">Download the CSV report</a></p>
+<p>The csv lists all the Scratch Commands with their appearances.</p>
+<p>You can open the file with Excel and filter out the commands without appearances like the image below:</p>
+<img src="./gh-pages/csvtoexcel.png">
+<p>
+<ul>
+<li/>
+There are 3 data commands, 1 readVariable and 2 setVar:to:.
+<li/>There are 6 looks commands, 1 hide, 1 say:, 1 say:duration:elapsed:from:, 1 show and 2 startScene.
+<li/>There are 10 events commands, 3 whenClicked, 4 whenGreenFlag, 1 whenIReceive, 1 whenSceneStarts
+<li/>There is 1 control command, 1 doForever.
+</ul>
+
+</p>
+
+<h4>CUR Report</h4>
+<p><a href="./gh-pages/Ghoul example.cur">Download the CUR report</a></p>
+<p>You can open the CUR report with your favorite text editor.
+<img src="./gh-pages/curreport.png">
+<p>The CUR report illustrates communications between sprites. There is a detailed report for every message and variable. Ghoul also reports which sprites change the background (writers) and which detect this change (readers).</p>
+<h4>Ghoul example_m_.png</h4>
+<img src="./gh-pages/Ghoul example_m_.png">
+<p>The _m_ image is a graph that illustrates the messages of the Scratch project. In the example there is only one message. Scratch Cat sends it and Ghoul receives it.</p>
+<h4>Ghoul example_v_.png</h4>
+<img src="./gh-pages/Ghoul example_v_.png">
+<p>The _v_ image is a graph that illustrates the variables of the project. In the example there is only one variable. Boy1 writes it and Cassy reads it.</p>
+<h4>Ghoul example_s_.png</h4>
+<img src="./gh-pages/Ghoul example_s_.png">
+<p>The _s_ image is a graph that illustrates the communication implemented with backgrounds. In the example Crab changes the background and Starfish detects the change.</p>
+<h4>Ghoul example_a_.png</h4>
+<img src="./gh-pages/Ghoul example_a_.png">
+<p>The _a_ image is a graph that illustrates all the communications between sprites. It is in fact all the previous graphs combined.</p>
+
+<h2>Example</h2>
+<h3>A project</h3>
+      <iframe allowtransparency="true" width="485" height="402" src="http://scratch.mit.edu/projects/embed/10745561/?autostart=false" frameborder="0" allowfullscreen></iframe>
+<h3>Corresponding graph for messages</h3>
+	<a href="./Debug-It 2.3_m.png"><img src="Debug-It 2.3_m.png" width="485" height="402"></a>
+      </section>
+    </div>
+
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ghoul maintained by <a href="https://github.com/dimnikolos">dimnikolos</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-51549793-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>

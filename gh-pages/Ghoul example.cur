@@ -1,0 +1,24 @@
+message1
+------------------------------
+Receivers:Ghoul,
+Senders:Scratch Cat,
+
+var
+------------------------------
+Readers:Cassy,
+Writers:Boy1,
+
+scene
+------------------------------
+Readers:Starfish,
+Writers:Crab,
+
+Number of sprites: 6
+Number of variables: 1
+Variables as CUs per sprite: 0.17
+Number of messages: 1
+Messages as CUs per sprite: 0.17
+Number of lists: 0
+Lists as CUs per sprite 0.00
+Total CUs: 2
+CUs per sprite 0.33

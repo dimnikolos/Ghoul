@@ -214,13 +214,17 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
+#Folders used in project
+/test
+/Reports
+
 #Files used in project
 *.sb2
 *.cus
-*.cur
+/*.cur
 *.adj
-*_.png
-*.csv
+/*_.png
+/*.csv
 project.json
 #old svg files
 *.svg
