@@ -83,6 +83,9 @@ class StatsGen():
 	def writeStatstoCSV(self,filename):
 		csvname = filename + ".csv"
 		with open(csvname, 'wb') as f:
+			line = "%s%s%s\n" %("Command Name or Category",self.delimeter,"Number of appearances")
+			f.write(line)
+			f.write("-" * 30 + "\n")
 			for cat in self.sc.catNames:
 				line = "%s%s%s\n" % (cat,self.delimeter,self.catCounter[cat])
 				f.write(line)

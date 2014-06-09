@@ -4,6 +4,7 @@ import Tkinter
 import tkFileDialog
 import tkMessageBox
 from os.path import basename,split,splitext
+import unidecode
 
 from JSONinfo import *
 from StatsGen import *
