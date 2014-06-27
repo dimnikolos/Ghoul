@@ -43,6 +43,8 @@ nosetests.xml
 *.csv
 project.json
 *.html
+Reports/
 test/
 2013-2014/
 2012-2013/
+/gh-pages

@@ -50,7 +50,7 @@ class CUGraph():
 								edges.append((self.nameList.index(aWriter),self.nameList.index(aReader)))
 		return edges
 	
-	def writeGraph(self,filename,cuType="all",cuAsNode = False):
+	def writeGraph(self,filename,cuType="all",cuAsNode = False, export = 0):
 		if (cuType == "all"):
 			#allEdges is consists of edges from variables/messages/lists
 			
@@ -66,8 +66,8 @@ class CUGraph():
 			allEdges = self.graphEdges(cuType,cuAsNode = cuAsNode)
 		
 		if (len(allEdges)>0):
-			bbox = igraph.BoundingBox(800,600)
-			surface = cairo.ImageSurface(cairo.FORMAT_ARGB32,800,600)
+			bbox = igraph.BoundingBox(600,600)
+			surface = cairo.ImageSurface(cairo.FORMAT_ARGB32,600,600)
 			g = igraph.Graph(allEdges,directed = True)
 			#multiple lines are depicted
 			igraph.autocurve(g)
@@ -89,16 +89,19 @@ class CUGraph():
 				if (g.degree(vertex)<1):
 					verticesToRemove.append(vertex)
 			g.delete_vertices(verticesToRemove)
+			if (export):
+				g.write_adjacency(filename+".adj")
 			#g.write_adjacency(filename + ".adj")
 			#layout = g.layout("kk")
 			#g.write_svg(filename + ".svg")#,layout = layout)
 			plot = igraph.plot(g,surface,bounding_box = bbox)
 			plot.background = None
 			plot.redraw()
-			print(filename)
 			surface.write_to_png(filename + ".png")
+		"""
 		else:
 			print("No edges for type: %s") % (cuType)
+		"""
 
 		
 

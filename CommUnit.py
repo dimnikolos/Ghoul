@@ -111,14 +111,15 @@ class CommUnit:
 			returnString = self.cuName + u"\n" + u"-" * 30+ u"\n" + u"Receivers:"
 		else:
 			returnString = self.cuName + u"\n" + u"-" * 30+ u"\n" + u"Readers:"
-		for reader in self.readers:
-			returnString += unicode(reader) + ','
+		returnString += ','.join(self.readers)
 		if (self.cuType == "message"):
 			returnString += u"\nSenders:"
 		else:
 			returnString += u"\nWriters:"
-		for writer in self.writers:
+		"""for writer in self.writers:
 			returnString += unicode(writer) + ','
+		"""
+		returnString += ','.join([unicode(writer) for writer in self.writers])
 		return(returnString)
 
 

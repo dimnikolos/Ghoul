@@ -88,13 +88,14 @@ class StatsGen():
 			f.write("-" * 30 + "\n")
 			for cat in self.sc.catNames:
 				line = "%s%s%s\n" % (cat,self.delimeter,self.catCounter[cat])
-				f.write(line)
+				f.write(line)				
+			for cat in self.sc.catNames:
 				f.write("-" * 30 + "\n")
 				for command in self.sc.catCommands[cat]:
 					line = "%s%s%s\n" % (command,self.delimeter,self.commandCounter[command])
 					f.write(line)
 				f.write("-" * 30 + "\n")
-			f.write("Number of floating scripts is: %d" % (self.floatingScripts))
+			f.write("Number of floating scripts %s %d" % (self.delimeter,self.floatingScripts))
 			
 
 	def showStatsonScreen(self):
@@ -104,7 +105,7 @@ class StatsGen():
 		for command in sorted(self.commandCounter.keys()):
 			print("%s:%s") % (command,self.commandCounter[command])
 		print "-" * 30
-		print("Number of floating scripts is: %d" % (self.floatingScripts))
+		print("Number of floating scripts %s %d" % (self.delimeter,self.floatingScripts))
 
 
 

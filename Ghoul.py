@@ -17,6 +17,7 @@ class Main:
     def __init__(self):
         self.labelText = Tkinter.StringVar()
         self.parsedFile = False
+        self.export = Tkinter.IntVar();
     def getBasename(self):
         """getBasename(self)
            the original filename is used
@@ -81,7 +82,7 @@ class Main:
             cug.writeGraph(self.projectBasename+"_m_","message", cuAsNode = False)
             cug.writeGraph(self.projectBasename+"_l_","list", cuAsNode = True)
             cug.writeGraph(self.projectBasename+"_s_","scene", cuAsNode = True)
-            cug.writeGraph(self.projectBasename+"_a_")
+            cug.writeGraph(self.projectBasename+"_a_", export = self.export.get())
             tkMessageBox.showinfo("OK", "Generated png files!")
         else:
             tkMessageBox.showinfo("Select file first","Please select a Scratch project first!")
@@ -90,7 +91,7 @@ def main():
     """main
        read file and write three reports and the svg files
     """
-    
+    export = 0;
     top = Tkinter.Tk()
     mainInstance = Main()
     # Code to add widgets will go here...
@@ -99,12 +100,14 @@ def main():
     writeStatsButton = Tkinter.Button(top,text="Write Statistics", command = mainInstance.writeStats, width=17)
     writeCURButton   = Tkinter.Button(top,text="Write CUR report", command = mainInstance.writeCUR, width=17)
     writePNGButton   = Tkinter.Button(top,text="Generate graphs", command = mainInstance.writePNGs, width=17)
+    exportCheckBox   = Tkinter.Checkbutton(top,text="Export adjacency",variable = mainInstance.export)
     #writePNGButton2  = Tkinter.Button(top,text="Generate graphs 2", command = mainInstance.writePNGs2, width=17)
     openFileButton.pack()
     nameLabel.pack()
     writeStatsButton.pack()
     writeCURButton.pack()
     writePNGButton.pack()
+    exportCheckBox.pack()
     top.mainloop()
     
 main()
