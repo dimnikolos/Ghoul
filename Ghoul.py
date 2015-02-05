@@ -62,7 +62,7 @@ class Main:
             tkMessageBox.showinfo("Select file first","Please select a Scratch project first!")
     def writeCUR(self):
         if (self.parsedFile):
-            #CUR report is a statistics report about 
+            #CUR report is a statistics report about
             #communication units
             self.cul.writeCUStoFile(self.projectBasename)
             self.cu.writeCUReporttoFile(self.projectBasename)
@@ -79,7 +79,7 @@ class Main:
             #4.all communication units
             cug = CUGraph(self.cul,self.sprites)
             cug.writeGraph(self.projectBasename+"_v_","variable",cuAsNode = True)
-            cug.writeGraph(self.projectBasename+"_m_","message", cuAsNode = False)
+            cug.writeGraph(self.projectBasename+"_m_","message", cuAsNode = True)
             cug.writeGraph(self.projectBasename+"_l_","list", cuAsNode = True)
             cug.writeGraph(self.projectBasename+"_s_","scene", cuAsNode = True)
             cug.writeGraph(self.projectBasename+"_a_", export = self.export.get())
@@ -109,5 +109,5 @@ def main():
     writePNGButton.pack()
     exportCheckBox.pack()
     top.mainloop()
-    
+
 main()
