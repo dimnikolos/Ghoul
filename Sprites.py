@@ -1,10 +1,10 @@
 #-*- coding: utf-8 -*-
 from ScratchCommands import *
 
-def flattenScripts(myscript):	
+def flattenScripts(myscript):
 	"""
 	flattenScripts(myscript)
-	a recursive function that flattens a script 
+	a recursive function that flattens a script
 	which is represented by a list of lists of lists
 	to a single list
 	"""
@@ -37,7 +37,7 @@ class Sprite():
 	def __init__(self,name):
 		self.scripts=[]
 		self.name = name
-		
+
 
 	def appendScript(self,script):
 		self.scripts.append(script)
@@ -61,10 +61,10 @@ def jsontoSprites(JSONStruct):
 	if ("scripts" in JSONStruct.keys()):#scripts in the first
 										#level of JSON means that
 										#the stage has scripts
-		spriteList.append(Sprite("stage"))
+		spriteList.append(Sprite("scene"))
 		for aScript in JSONStruct["scripts"]:
 			spriteList[0].appendScript(flattenScripts(aScript[2]))
-	
+
 	if ("children" in JSONStruct.keys()):
 			for child in JSONStruct["children"]:
 				if ("scripts" in child.keys()):
@@ -78,5 +78,3 @@ def jsontoSprites(JSONStruct):
 
 
 	return(floatingScripts,spriteList)
-
-
