@@ -81,7 +81,7 @@ class CUGraph():
                     verticesToRemove.append(vertex)
             g.delete_vertices(verticesToRemove)
             if (export):
-                g.write_adjacency(filename+".adj")
+                g.write_pajek(filename+".net")
             #g.write_adjacency(filename + ".adj")
             #layout = g.layout("kk")
             #g.write_svg(filename + ".svg")#,layout = layout)

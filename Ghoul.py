@@ -41,9 +41,9 @@ class Main:
                 tkMessageBox.showinfo("Project.json error!", "File project.json is corrupted. Select another .sb2 file!")
             else:
                 self.projectInfo  = JSONinfo(self.projectJSON)
-                if not os.path.exists('Reports'):
-                    os.makedirs('Reports')
-                self.projectBasename = os.path.join('Reports',self.getBasename());
+                if not os.path.exists('c:\Reports'):
+                    os.makedirs('c:\Reports')
+                self.projectBasename = os.path.join('c:\Reports',self.getBasename());
 
                 (self.floatingScripts,self.sprites) = jsontoSprites(self.projectJSON)
                 self.cu = CompCUs(self.projectInfo,self.sprites)
@@ -100,7 +100,7 @@ def main():
     writeStatsButton = Tkinter.Button(top,text="Write Statistics", command = mainInstance.writeStats, width=17)
     writeCURButton   = Tkinter.Button(top,text="Write CUR report", command = mainInstance.writeCUR, width=17)
     writePNGButton   = Tkinter.Button(top,text="Generate graphs", command = mainInstance.writePNGs, width=17)
-    exportCheckBox   = Tkinter.Checkbutton(top,text="Export adjacency",variable = mainInstance.export)
+    exportCheckBox   = Tkinter.Checkbutton(top,text="Export Pajek",variable = mainInstance.export)
     #writePNGButton2  = Tkinter.Button(top,text="Generate graphs 2", command = mainInstance.writePNGs2, width=17)
     openFileButton.pack()
     nameLabel.pack()
