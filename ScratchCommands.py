@@ -155,11 +155,12 @@ class ScratchCommands:
                                         "putPenUp",
                                         "setPenHueTo:",
                                         "setPenShadeTo:",
+                                        "changePenShadeBy:"
                                         "stampCostume"]
         self.catCommands["sound"]=      ["changeTempoBy:",
                                         "changeVolumeBy:",
                                         "doPlaySoundAndWait",
-                                        "drum:duration:elapsed:from",
+                                        "drum:duration:elapsed:from:",
                                         "instrument:",
                                         "midiInstrument:",
                                         "noteOn:duration:elapsed:from:",
