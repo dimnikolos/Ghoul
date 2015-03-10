@@ -78,10 +78,10 @@ class Main:
             #3.lists
             #4.all communication units
             cug = CUGraph(self.cul,self.sprites)
-            cug.writeGraph(self.projectBasename+"_v_","variable",cuAsNode = True)
-            cug.writeGraph(self.projectBasename+"_m_","message", cuAsNode = True)
-            cug.writeGraph(self.projectBasename+"_l_","list", cuAsNode = True)
-            cug.writeGraph(self.projectBasename+"_s_","scene", cuAsNode = True)
+            cug.writeGraph(self.projectBasename+"_v_","variable",cuAsNode = False)
+            cug.writeGraph(self.projectBasename+"_m_","message", cuAsNode = False)
+            cug.writeGraph(self.projectBasename+"_l_","list", cuAsNode = False)
+            cug.writeGraph(self.projectBasename+"_s_","scene", cuAsNode = False)
             cug.writeGraph(self.projectBasename+"_a_", export = self.export.get())
             tkMessageBox.showinfo("OK", "Generated png files!")
         else:

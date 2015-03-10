@@ -2,6 +2,7 @@
 import igraph
 import igraph.vendor.texttable #needed for py2exe
 import cairo
+import csv
 from unidecode import unidecode
 from Sprites import *
 
@@ -46,6 +47,7 @@ class CUGraph():
                             #if ((self.nameList.index(aReader),self.nameList.index(aWriter)) not in edges):
                                 edges.append((self.nameList.index(aWriter),self.nameList.index(aReader)))
         return edges
+
     def writeGraph(self,filename,cuType="all",cuAsNode = False, export = 0):
         if (cuType == "all"):
             #allEdges is consists of edges from variables/messages/lists
@@ -55,8 +57,24 @@ class CUGraph():
             #allEdges.extend([edge for edge in self.graphEdges("message") if edge not in allEdges])
             #allEdges.extend([edge for edge in self.graphEdges("scene",True) if edge not in allEdges])
             allEdges.extend([edge for edge in self.graphEdges("list",True)])
-            allEdges.extend([edge for edge in self.graphEdges("message",False)])
+            allEdges.extend([edge for edge in self.graphEdges("message",True)])
             allEdges.extend([edge for edge in self.graphEdges("scene",True)])
+            g = igraph.Graph(allEdges,directed = True)
+            g.vs["label"] = [unidecode(unicode(label)) for label in self.nameList]
+            g.vs["id"]=g.vs["label"]
+            #csv centrality report   
+            with open(filename+'_centrality.csv','w') as csvfile:
+                writer = csv.writer(csvfile,delimiter = ';',lineterminator = '\n',
+                    quoting = csv.QUOTE_NONE)
+                csvRow = ["Label","In Degree","Out Degree","Closeness","Betweenness",
+                    "Clustering Coefficient","Eccentricity"]
+                writer.writerow(csvRow)
+                for vertex in g.vs:
+                    csvRow = [vertex['label'],g.degree(vertex,mode="in"),
+                        g.degree(vertex,mode="out"),g.closeness(vertex),
+                        g.betweenness(vertex),g.transitivity_local_undirected(vertex),
+                        g.eccentricity(vertex)]
+                    writer.writerow(csvRow)
         else:
             allEdges = self.graphEdges(cuType,cuAsNode = cuAsNode)
         if (len(allEdges)>0):
@@ -68,12 +86,14 @@ class CUGraph():
             #all sprites are depicted in the graph
             #connected or not
             #labels converted to greeklish
-            #only last 6 digits -> does not clutter graph with huge names
-            g.vs["label"] = [unidecode(unicode(label))[-11:] for label in self.nameList]
+            g.vs["label"] = [unidecode(unicode(label)) for label in self.nameList]
+            g.vs["id"] = g.vs["label"]
             for i in range(1,len(g.vs)):
                 g.vs[i]["color"]="blue"
+                g.vs[i]["size"] = 10*g.eccentricity(g.vs[i])
             for i in range(1,min(self.spritesNumber,len(g.vs))):
                 g.vs[i]["color"]="red"
+                g.vs[i]["size"] = 10*g.eccentricity(g.vs[i])
             #remove isolated vertices
             verticesToRemove = []
             for vertex in g.vs:
@@ -88,7 +108,7 @@ class CUGraph():
             plot = igraph.plot(g,surface,bounding_box = bbox)
             plot.background = None
             plot.redraw()
-            surface.write_to_png(filename + ".png")
+            surface.write_to_png(filename + ".png")            
         """
         else:
             print("No edges for type: %s") % (cuType)
