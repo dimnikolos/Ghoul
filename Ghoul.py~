@@ -89,7 +89,7 @@ class Main:
             tkMessageBox.showinfo("Select file first","Please select a Scratch project first!")
     def writeMBS(self):
         mbs = MoreBlocks(self.sprites)
-        mbs.parseMBs()
+        mbs.parseMBs
         mbs.writeMoreBlocksReportToFile(self.projectBasename)
 
 def main():

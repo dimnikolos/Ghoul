@@ -33,7 +33,7 @@ class Sprite():
     """
     def __init__(self,name):
         self.scripts= []
-        self.moreBlocks = []
+        self.moreBlocks = {}
         self.name = name
 
     def appendScript(self,script):
