@@ -5,7 +5,7 @@ import json
 from itertools import chain
 
 SCRATCH_EXTENSION = ".sb2"
-DELIMETER = ","#for the CSV
+DELIMETER = ";"#for the CSV
 TREE_PREFIX = "|-"#for printing the TREE
 
 catNames = [#Command Categories Names
