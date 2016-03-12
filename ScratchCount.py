@@ -4,7 +4,6 @@ import zipfile
 import json
 from itertools import chain
 
-
 SCRATCH_EXTENSION = ".sb2"
 DELIMETER = ","#for the CSV
 TREE_PREFIX = "|-"#for printing the TREE
@@ -226,8 +225,6 @@ def CountCommand(command):
   else:
     return(False)
 
-
-
 class Node(object):
   """
   Basic tree structure
@@ -251,21 +248,12 @@ class Node(object):
 
   def countinTree(self):
     """
-    Count every command in the tree structure
+    Recursively counts every command in the tree structure
     """
-    CountCommand(self.data)
+    if (not CountCommand(self.data)):
+      print("ALERT %s seems to be a command but is not on Scratch Commands list!")
     for child in self.children:
       child.countinTree()
-    """
-    if (self.hasChild()):
-      if (not CountCommand(self.data)):
-        print("ALERT: %s seems to be a command but is not in list of commands") % self.data
-      for child in self.children:
-        child.countinTree()
-    else:
-      if (CountCommand(self.data)):
-        print("ALERT: %s doesn't seem to be a command but it is in list of commands") % self.data
-    """
 
 def makeTree(aScript):
   """
@@ -274,13 +262,18 @@ def makeTree(aScript):
   if (type(aScript) is list):
     theTree = makeTree(aScript[0])
     for aChild in aScript[1:]:
-      if (type(aChild) is list):
+      if (type(aChild) is list):#all commands are represented as lists
         theTree.addChild(makeTree(aChild))
+      #if aChild is not a list it means it is a parameter and it is not
+      #added to the tree
     return theTree
   else:
     return(Node(aScript))
 
 def file2Json(sb2File):
+  """
+  Opens sb2file unzips it and parses the json object in project.json
+  """
   try:
     zfile = zipfile.ZipFile(sb2File)
   except:
@@ -307,31 +300,30 @@ def file2Json(sb2File):
     print("Not A JSON file?")
     return(None)
 
-
-
-
 def countCommands(parsedJson):
-  allScripts = []
-  flatOneScript = []
+  """
+  Counts all commands in json
+  """
   if ("children" in parsedJson.keys()):
     for sprite in parsedJson["children"]:
-      if ("scripts" in sprite.keys()):
+      if ("scripts" in sprite.keys()):#if there are scripts
         for aScript in sprite["scripts"]:
           currentScript = aScript[2]#first two elements
                                      #of aScript are for x and y
           scriptTree = makeTree(currentScript)
-          scriptTree.printNode(TREE_PREFIX)
+          #scriptTree.printNode(TREE_PREFIX)
           scriptTree.countinTree()
 
-
-
-
-
 def main():
-  sb2List = []
+  """
+  Count commands in the sb2 files it finds in the folder
+  and writes the result as a csv in ScratchCount.csv
+  """
+  sb2List = []#the list of .sb2 filenames
   for aFile in listdir("."):
     if aFile.endswith(SCRATCH_EXTENSION):
       sb2List.append(aFile)
+  #make caption of csv file
   line = "Scratch Project" + DELIMETER
   for cat in catNames:
     line += (cat + DELIMETER)
@@ -340,11 +332,13 @@ def main():
       line += (command + DELIMETER)
   line += "\n"
   with open("ScratchCount.csv","w") as csvfile:
+    #write caption of csv file
     csvfile.write(line)
     for sb2File in sorted(sb2List):
-      countDict.clear()
+      countDict.clear()#countDict is erased for every file
       projectJson = file2Json(sb2File)
       countCommands(projectJson)
+      #make line of csv file
       line = sb2File + DELIMETER
       for cat in catNames:
         if cat in countDict.keys():
@@ -359,9 +353,5 @@ def main():
             line+=("0" + DELIMETER)
       line += "\n"
       csvfile.write(line)
-
-    
-  
-
 
 main()
