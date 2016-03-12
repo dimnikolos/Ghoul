@@ -239,8 +239,8 @@ class Node(object):
   def addChild(self,child):
     self.children.append(child)
 
-  def printTree(self,prefix):
-    line = str(prefix) + str(self.data) +"\n"
+  def printNode(self,prefix):
+    line = unicode(prefix) + unicode(self.data) + "\n"
     print(line)
     newPrefix = TREE_PREFIX + prefix
     for child in self.children:
@@ -253,7 +253,11 @@ class Node(object):
     """
     Count every command in the tree structure
     """
-    if self.hasChild():
+    CountCommand(self.data)
+    for child in self.children:
+      child.countinTree()
+    """
+    if (self.hasChild()):
       if (not CountCommand(self.data)):
         print("ALERT: %s seems to be a command but is not in list of commands") % self.data
       for child in self.children:
@@ -261,10 +265,7 @@ class Node(object):
     else:
       if (CountCommand(self.data)):
         print("ALERT: %s doesn't seem to be a command but it is in list of commands") % self.data
-
-
-
-
+    """
 
 def makeTree(aScript):
   """
@@ -273,7 +274,8 @@ def makeTree(aScript):
   if (type(aScript) is list):
     theTree = makeTree(aScript[0])
     for aChild in aScript[1:]:
-      theTree.addChild(makeTree(aChild))
+      if (type(aChild) is list):
+        theTree.addChild(makeTree(aChild))
     return theTree
   else:
     return(Node(aScript))
@@ -318,7 +320,7 @@ def countCommands(parsedJson):
           currentScript = aScript[2]#first two elements
                                      #of aScript are for x and y
           scriptTree = makeTree(currentScript)
-          #scriptTree.printNode(TREE_PREFIX)
+          scriptTree.printNode(TREE_PREFIX)
           scriptTree.countinTree()
 
 
@@ -339,7 +341,7 @@ def main():
   line += "\n"
   with open("ScratchCount.csv","w") as csvfile:
     csvfile.write(line)
-    for sb2File in sb2List:
+    for sb2File in sorted(sb2List):
       countDict.clear()
       projectJson = file2Json(sb2File)
       countCommands(projectJson)
