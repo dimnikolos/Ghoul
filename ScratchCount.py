@@ -189,7 +189,7 @@ catCommands["sound"] =  [
   "tempo",
   "volume"]
 
-catCommands["MoreBlocks"] = ["procDef"]
+catCommands["MoreBlocks"] = ["procDef", "call"]
 
 countDict = {} #a global Dictionary
 
@@ -251,16 +251,20 @@ class Node(object):
     Recursively counts every command in the tree structure
     """
     if (not CountCommand(self.data)):
-      print("ALERT %s seems to be a command but is not on Scratch Commands list!")
+      print("ALERT %s seems to be a command but is not on Scratch Commands list!") %(self.data)
     for child in self.children:
-      child.countinTree()
+      if (child):
+        child.countinTree()
 
 def makeTree(aScript):
   """
   Parses the list of lists into a tree
   """
   if (type(aScript) is list):
-    theTree = makeTree(aScript[0])
+    try:
+      theTree = makeTree(aScript[0])
+    except IndexError:
+      theTree = None
     for aChild in aScript[1:]:
       if (type(aChild) is list):#all commands are represented as lists
         theTree.addChild(makeTree(aChild))
@@ -269,6 +273,7 @@ def makeTree(aScript):
     return theTree
   else:
     return(Node(aScript))
+
 
 def file2Json(sb2File):
   """
@@ -312,7 +317,8 @@ def countCommands(parsedJson):
                                      #of aScript are for x and y
           scriptTree = makeTree(currentScript)
           #scriptTree.printNode(TREE_PREFIX)
-          scriptTree.countinTree()
+          if (scriptTree):
+            scriptTree.countinTree()
 
 def main():
   """
